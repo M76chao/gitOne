@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BY_MLC</title>
+    <style>
+        .none {
+            display: none;
+        }
+        li {
+            display:inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #e0e0e0;
+            list-style: none;
+            border: 1px black solid;
+            text-align: center;
+        }
+        #one{
+            background-color: #e0e0e0;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1{
+            font-size: 16px;
+            margin-top: 30px; ;
+            font-weight: 500;
+        }
+        #begin {
+            display: inline-block;
+            font: 500 50px/45px "微软雅黑";
+            color:black;
+            padding: 5px;
+            border: 5px black dashed;
+            text-decoration: none;
+            margin-top:60px;
+            margin-bottom: 30px;
+        }
+        #begin:active{
+            color: red;
+        }
+        #self input{
+            width: 26px;
+            margin-right: 5px;
+        }
+        #self {
+            margin-top: 30px;
+        }
+        #warn {
+            margin: 30px 0 ;
+            color: red;
+        }
+        #father {
+            border: 2px black solid;
+            white-space: nowrap;
+            position: absolute;
+            top: 35px;
+        }
+        #title {
+            position: absolute;
+            top: -32px;
+        }
+        #titl{
+            float:left;
+        }
+        #titr{
+            float:right;
+            margin-right: 10px;
+        }
+        #end{
+            height: 56px;
+            background-color: #000;
+            color: #fff;
+            font: 40px "微软雅黑" ;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+        #pink{
+            background-color: pink;
+            padding: 2px;
+        }
+        #gray{
+            color: gray;
+            font-weight: 600;
+            padding: 2px;
+        }
+        #moshi{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="one">
+    <input id="moshi" type="button" value="普通模式"/>
+    <h1>数字代表它所在的九宫格一共有几个炸弹，找出所有不是炸弹的位置，获取胜利</h1>
+    <a id="begin" href="#" onclick="return false">开始游戏</a>
+    <div id="degree">
+        <input id="easy" type="radio" checked="checked" name="degree"/>简单
+        <input id="hard" type="radio" name="degree"/>一般
+        <input id="custom" type="radio" name="degree"/>自定义
+        <div id="self" class="none">
+            横：<input id="sw" type="text" value="30"/>
+            竖：<input id="sh" type="text" value="16"/>
+            炸弹：<input id="sboon" type="text" value="80"/><br/>
+            <div id="warn" class="none">
+                请输入正确的数字!
+            </div>
+        </div>
+    </div>
+</div>
+<div id="father" class="none">
+    <div id="title">
+        <div id="titl">
+            <input type="button" value="标记" id="pink"/>
+            <input type="button" value="标记" id="gray"/>
+        </div>
+        <div id="titr"></div>
+    </div>
+    <div id="centent"></div>
+</div>
+<div id="end" class="none">再来一次</div>
+<script>
+	console.log("8.21：现在来看的确有好多地方没有做优化，本来想改一下的，但是也算是记录青春的一种方式吧");
+
+
+
+
+	
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var one = $("one");
+    var end = $("end");
+    var begin = $("begin");
+    var fu = $("father");
+    var centent = $("centent");
+    var title = $("title");
+    var zili = fu.getElementsByTagName("li");
+    var zhadan = [];
+    var baihezi = 0;
+    var winh = window.innerHeight;
+    var winw = window.innerWidth;
+    var timer = null;
+    var moshi = document.getElementById("moshi");
+    var jieshao = moshi.nextElementSibling;
+    one.style.height = winh + "px";
+    oneing();
+    
+    function oneing() {
+        var liw = 9;
+        var lih = 9;
+        var bnum = 9;
+        var easy = $("easy");
+        var hard = $("hard");
+        var custom = $("custom");
+        var self = $("self");
+        moshi.onclick = function () {
+            if (moshi.value === "普通模式") {
+                moshi.value = "破解模式";
+                jieshao.innerHTML = "炸弹哑火了，建议不要使用金手指，这样对炸弹不公平"
+            } else {
+                moshi.value = "普通模式";
+                jieshao.innerHTML = "经典扫雷，数字代表它所在的九宫格一共有几个炸弹，找出所有不是炸弹的位置，获取胜利"
+            }
+        }
+        easy.onclick = function () {
+            self.className = "none";
+        }
+        hard.onclick = function () {
+            self.className = "none";
+        }
+        custom.onclick = function () {
+            self.className = "";
+
+        }
+        begin.onclick = function () {
+            one.className = "none";
+            if (easy.checked) {
+                liw = 9;
+                lih = 9;
+                bnum = 9;
+            }
+            if (hard.checked) {
+                liw = 9;
+                lih = 9;
+                bnum = 17;
+            }
+            if (custom.checked) {
+                liw = $("sw").value / 1;
+                lih = $("sh").value / 1;
+                bnum = $("sboon").value / 1;
+            }
+            if (!(lih && liw && bnum)) {
+                $("warn").style.display = "block";
+                return
+            }
+            fu.className = "";
+            jitime();
+            makeli(liw, lih);
+            makezd(bnum, liw, lih);
+            makenum();
+            css();
+            yunxing();
+        }
+    }
+    function css() {
+        if (winw > centent.offsetWidth) {
+            fu.style.left = (winw - centent.offsetWidth) / 2 + "px";
+            title.style.width = fu.offsetWidth + "px";
+            end.style.width = fu.offsetWidth + "px";
+            end.style.left = fu.style.left;
+        } else {
+            title.style.width = (winw - 10) + "px";
+            end.style.width = winw + "px";
+        }
+        if (winh > (centent.offsetHeight - 56)) {
+            end.style.top = winh - fu.offsetTop - fu.offsetHeight + 10 + "px";
+        } else {
+            end.style.bottom = 0 + "px";
+        }
+    }
+    function jitime() {
+        var times = 00;
+        var timem = 00;
+        var titr = $("titr");
+        titr.innerHTML = "用时：" + timem + "分" + times + "秒";
+        timer = setInterval(function () {
+            times++;
+            if (times === 60) {
+                times = 0;
+                timem++;
+            }
+            titr.innerHTML = "用时：" + timem + "分" + times + "秒";
+            if (timem === 60) {
+                clearInterval(timer);
+                titr.innerHTML = "我懒得数了，太久了……"
+            }
+        }, 1000);
+    }
+    function makeli(one, two) {
+        var zi = [];
+        for (var y = 1; y <= two; y++) {
+            for (var x = 1; x <= one; x++) {
+                zi.push("<li " + "id=" + "x" + x + "y" + y + ">" + "." + "</li>");
+            }
+            zi.push("</br>");
+        }
+        centent.innerHTML = zi.join("");
+    }
+    function makezd(nandu, one, two) {
+        for (var i = 0; i < nandu; i++) {
+            var xx = Math.ceil(Math.random() * (one - 1));
+            var yy = Math.ceil(Math.random() * (two - 1));
+            var zz = document.getElementById("x" + xx + "y" + yy);
+            if (zz.boon) {
+                i--;
+                continue;
+            }
+            zz.boon = "boon";
+            zhadan.push(zz);
+            zz.className = "bbbbbbbbbbbb";
+        }
+    }
+    function makenum() {
+        for (var i = 0; i < zili.length; i++) {
+            var num = 0;
+            if (zili[i].boon === "boon") {
+                zili[i].num = "爆";
+                continue;
+            }
+            var jiugong = jiug(zili[i]);
+            for (var e = 0; e < jiugong.length; e++) {
+                if (jiugong[e].boon == "boon") {
+                    num++;
+                }
+            }
+            zili[i].num = num;
+        }
+    }
+    function jiug(ss) {
+        var sso = ss.id.split("y");
+        var ziY = sso[1] / 1;
+        var ziX = sso[0].split("x").join("") / 1;
+        var o1 =$("x" + (ziX - 1) + "y" + (ziY + 1));
+        var o2 = $("x" + ziX + "y" + (ziY + 1));
+        var o3 = $("x" + (ziX + 1) + "y" + (ziY + 1));
+        var o4 = $("x" + (ziX - 1) + "y" + ziY);
+        var o5 = $("x" + (ziX + 1) + "y" + ziY);
+        var o6 = $("x" + (ziX - 1) + "y" + (ziY - 1));
+        var o7 = $("x" + (ziX + 1) + "y" + (ziY - 1));
+        var o8 = $("x" + ziX + "y" + (ziY - 1));
+        var jiu = [];
+        jiu = [o1, o2, o3, o4, o5, o6, o7, o8];
+        for (var oo = 0; oo < jiu.length; oo++) {
+            if (!jiu[oo]) {
+                jiu.splice(oo, 1);
+                oo--;
+            }
+        }
+        return jiu;
+    }
+    function yunxing() {
+        var logo = null;
+        var pink = document.getElementById("pink");
+        var gray = document.getElementById("gray");
+        pink.onclick = function () {
+            logo = "pink";
+        }
+        gray.onclick = function () {
+            logo = "#808080";
+        }
+        for (var i = 0; i < zili.length; i++) {
+            zili[i].onclick = function () {
+                if (this.innerHTML !== this.num) {
+                    if (logo) {
+                        this.style.backgroundColor = logo;
+                        logo = null;
+                        return
+                    }
+                    if (this.boon) {
+                        if (moshi.value !== "普通模式") {
+                            this.style.backgroundColor = "pink";
+                            return
+                        }
+                        this.style.backgroundColor = "red";
+                        this.innerHTML = this.num;
+                        zhadan.splice(zhadan.indexOf(this), 1);
+                        gover();
+                        return
+                    }
+                    qingchu(this);
+                    if (this.num == "&nbsp;") {
+                        youhua(this);
+                    }
+                    if (baihezi >= (zili.length - zhadan.length)) {
+                        win();
+                    }
+                }
+            }
+        }
+        
+    }
+    function qingchu(ss) {
+        ss.style.backgroundColor = "#fff";
+        if (ss.num == 0) {
+            ss.num = "&nbsp;";
+        }
+        ss.innerHTML = ss.num;
+        ss.bai = "bai";
+        baihezi++;
+    }
+    function youhua(ss) {
+        console.log(1);
+        var jiu = jiug(ss);
+        ss.id = null;
+        for (var k = 0; k < jiu.length; k++) {
+            if (jiu[k].bai == "bai") {
+                continue;
+            }
+            qingchu(jiu[k]);
+            if (jiu[k].num == "&nbsp;") {
+                youhua(jiu[k]);
+            }
+        }
+    }
+    function gover() {
+        clearInterval(timer);
+        var timer1 = null;
+        var ti = 0;
+        timer1 = setInterval(function () {
+            if (ti < zhadan.length) {
+                zhadan[ti].style.backgroundColor = "red";
+            }
+            ti++;
+            if (ti == zhadan.length) {
+                clearInterval(timer1);
+            }
+        }, 250)
+        alert("游戏结束");
+        end.className = "end";
+    }
+    function win() {
+        clearInterval(timer);
+        alert("( •̀ ω •́ )y游戏胜利( •̀ ω •́ )y");
+        var timer2 = null;
+        var ti = 0;
+        timer2 = setInterval(function () {
+            if (ti < zhadan.length) {
+                zhadan[ti].style.backgroundColor = "#0E88EB";
+                zhadan[ti].innerText = zhadan[ti].num;
+            }
+            ti++;
+            if (ti == zhadan.length) {
+                clearInterval(timer2);
+            }
+        }, 250)
+        end.className = "end";
+    }
+    window.onscroll = function () {
+        title.style.left = (window.pageXOffset) + "px";
+    }
+    end.onclick = function () {
+        window.location.reload();
+    }
+</script>
+</body>
+</html>

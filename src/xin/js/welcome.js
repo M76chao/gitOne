@@ -1,0 +1,167 @@
+!function () {
+		var can = document.querySelector("canvas");
+		can.width = window.innerWidth*2;
+		can.style.width=window.innerWidth-20+"px";
+		can.height = window.innerHeight*2;
+		can.style.height = window.innerHeight-20+"px";
+		var ctx = can.getContext("2d");
+		var x,y,x0,y0,x1,y1,w,h,r,s,d,c,a,b,f,g,f1,g1,o,o1,o2,o3,o4,dx,dy; 
+		var k=["f","e","d","c","b","a",9,8,7,6,5,4,3,2,1,0];//太极优化
+		var ci=0;
+		var ck;
+
+		x=y=x0=y0=0;
+		w = can.width;	
+		h = can.height;
+		dx=0;
+		dy=0;
+		c = Math.sqrt(w*w + h*h);//斜边
+		w>h?r = h/3:r = w/4;  //圆的半径
+		
+
+		s = 5,//时间，总共需要5秒，线1秒，圆1秒，太极1秒,旋转2秒
+		d = s*1000/25/5; //点，速度
+		var cd = d/16;  //k,ci,cd 为控制太极变色的变量
+
+
+		x1 = w*(c/2-r)/c;  //线在圆上边的坐标
+		y1 = x1*h/w;
+
+		//a = (c/2-r)/d;   //8.17？提出此处应该是错误,
+		//b = a * h/w;//线速度，b的值不能改，关乎角度的问题
+		a = x1/d;
+		b = y1/d;
+		//Math.asin(h/c),___, Math.PI-Math.asin(h/c);
+		f = Math.asin(h/c)*2/d; //画圆的速度，角的变量
+		g = (Math.PI-Math.asin(h/c)*2)/d;
+		o1 = Math.asin(h/c);
+		o2 = (Math.PI-Math.asin(h/c)*2)+o1;
+		o3 = o2+o1*2;		//Math.PI+Math.asin(h/c);
+		o4 = 2*Math.PI-o1;
+		f1=g1=0;
+
+		ctx.lineCap="round"; //线帽，看起来更圆滑
+		ctx.lineWidth = 10; //线宽
+		//x1 = w/2-w*r/c+10*w/c;
+		
+		function line (){
+			//ctx.clearRect(0,0,w,h);//清除画布
+			ctx.beginPath();
+			ctx.moveTo(0,0);
+			ctx.lineTo(x0,y0);
+
+			ctx.moveTo(w,0);
+			ctx.lineTo(w-x0,y0);
+
+			ctx.moveTo(0,h);
+			ctx.lineTo(x0,h-y0);
+
+			ctx.moveTo(w,h);
+			ctx.lineTo(w-x0,h-y0);
+
+			ctx.stroke();
+		}
+		function row (){
+				ctx.beginPath();
+				ctx.moveTo(w-x0,h-y0);
+				ctx.arc(w/2,h/2,r,o1,o1+g1);
+
+				ctx.moveTo(x0,h-y0);
+				ctx.arc(w/2,h/2,r,o2,o2+f1);
+
+				ctx.moveTo(x0,y0);
+				ctx.arc(w/2,h/2,r,o3,o3+g1);
+
+				ctx.moveTo(w-x0,y0);
+				ctx.arc(w/2,h/2,r,o4,o4+f1);
+
+				f1+=f;
+				g1+=g;
+
+				ctx.stroke();
+		}
+		function deline (){
+			ctx.clearRect(0,0,w,h);//清除画布
+			ctx.beginPath();
+			ctx.lineWidth = 10;
+			
+
+			ctx.moveTo(x1,y1);
+			ctx.lineTo(dx,dy);
+
+
+			ctx.moveTo(w-x0,y0);
+			ctx.lineTo(w-dx,dy);
+
+			ctx.moveTo(x0,h-y0);
+			ctx.lineTo(dx,h-dy);
+
+			ctx.moveTo(w-x0,h-y0);
+			ctx.lineTo(w-dx,h-dy);
+
+			ctx.stroke();
+			dx+=a;
+			dy+=b;	
+		}
+		function c太极(){
+			
+			if (ck<15) {
+				ci++;
+			}
+			ck = Math.round(ci/cd);
+            ctx.beginPath();
+            ctx.moveTo(w/2+r,h/2);
+            ctx.arc(w/2,h/2,r,0,Math.PI,false);
+			ctx.arc(w/2-(r/2),h/2,r/2,Math.PI,0,true);
+			ctx.arc(w/2+(r/2),h/2,r/2,Math.PI,0,false);
+			ctx.fillStyle = "#"+k[ck]+k[ck]+k[ck];
+			ctx.fill();
+			
+			ctx.beginPath();
+			ctx.moveTo(w/2+r,h/2);
+			ctx.arc(w/2,h/2,r,0,2*Math.PI,false);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.arc(w/2-(r/2),h/2,r/5,0,2*Math.PI);
+			ctx.fillStyle = "#"+k[ck]+k[ck]+k[ck];
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(w/2+(r/2),h/2,r/5,0,2*Math.PI);
+			ctx.fillStyle = "#fff";
+			ctx.fill();
+		}
+
+
+		var time = setInterval(function(){
+			console.log(1);  //记录时间是否符合预期
+			if (x0+a < x1) { //画直线
+				line();
+				x0+=a;
+				y0+=b;	
+			}else{//画圆
+				if (x0<x1) {//细节处理,if优化cpu消耗
+					/*console.log(3);*/
+					x0=x1;
+					y0=y1;
+					line(); 
+				}	
+				if (o1+g1<=o2) {
+					row();
+				}else {
+					if (dx+a<=x1) {
+						deline();
+						c太极();
+					}else {
+						ctx.clearRect(0,0,w,h);//清除画布
+						c太极();
+						clearInterval(time);
+						can.className="can";
+						/*console.log(2);*/  //清除定时器后不意味着函数中的return
+					}
+				}
+			}	
+				
+		},25)
+	}();

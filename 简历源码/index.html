@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit" />
+    <title>Sens World</title>
+    <script>
+        console.log("2017.8.22日为了参加360前段实习生面试所写页面，此页面是借鉴自https://www.zhihu.com/people/sens1992/answers，已获得授权")
+    </script>
+    <link rel="stylesheet" href="static/css/index.css" />
+</head>
+
+<body>
+    <div class="preload-block">
+        <img src="https://ws1.sinaimg.cn/large/6f6196f2gy1fgsxbr1390j21hc0zkncd.jpg" />
+    </div>
+
+    <div class="welcome-block j-welcome-block  ">
+        <div class="welcome-block-main rel">
+            <div class="welcome-box-center j-welcome-box-center">
+                <span class="welcome-text j-welcome-text line1">额，趁现在资源还在加载</span>
+                <span class="welcome-text j-welcome-text line2">我先给你讲一个冷笑话</span>
+                <span class="welcome-text j-welcome-text line3">有一个叫程思序的人</span>
+                <span class="welcome-text j-welcome-text line4">整天思程序</span>
+                <span class="welcome-text j-welcome-text line5">．．．．．．</span>
+                <span class="welcome-text j-welcome-text line6">好尴尬，我们来看看资源加载完没有</span>
+                <span class="welcome-text j-welcome-text line7 fail">哇塞，居然没加载完！</span>
+                <span class="welcome-text j-welcome-text line7 success">哇塞，已经加载完了！</span>
+                <span class="welcome-text j-welcome-text line8 fail">那别怪没音乐特效了~</span>
+                <span class="welcome-text j-welcome-text line8 success">那我们就立刻开始吧！</span>
+                <span class="welcome-text-line">|</span>
+                <div class="welcome-btn-start"></div>
+            </div>
+
+            <div class="welcome-box-btn j-welcome-box-btn hide">
+                <input placeholder="" type="checkbox" class="j-welcome-btn">
+                <span class="welcome-btn"></span>
+                <p class="welcome-text-tip">点击按钮后记得使用滚轮哟</p>
+                <p class="welcome-text-add">
+                    2017.8.21`为参加360面试所写代码，<br> （原作者为知乎：
+                    <a href="https://www.zhihu.com/people/sens1992/answers">陈二狗不理包子脸</a>）
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="sky-block j-sky-block  ">
+        <div id="j-wrapper-block-back" class="wrapper-block">
+            <div id="j-stage-block-back" class="stage-block-back">
+                <img src="https://ws1.sinaimg.cn/large/6f6196f2gy1fgsxbr1390j21hc0zkncd.jpg" ondragstart="return false" class="wrapper-img j-wrapper-img-back" />
+                <canvas id="wrapper-cvs" class="wrapper-cvs j-wrapper-cvs"></canvas>
+            </div>
+        </div>
+        <div class="wrapper-block-main j-wrapper-block-main">
+            <div class="stage-block-main j-stage-block-main">
+                <div class="stage-box-earth j-stage-box-earth">
+                    <img src="https://ws1.sinaimg.cn/large/6f6196f2gy1fgsxez3vu7j20bc0bcqbl.jpg" alt="" class="j-stage-img-earth">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro-block j-intro-block  hide">
+        <div class="style-block"></div>
+        <pre class="display-block">
+    </pre>
+        <div class="intro-box">
+            <div class="intro-box-main j-intro-box-main  hide">
+                <p class="intro-box-hide">&emsp;&emsp;我叫孟令超，毕业三年了</p>
+                <p class="intro-box-hide">&emsp;&emsp;之前的工作与编程无关，今年刚学习编程</p>
+                <p class="intro-box-hide">&emsp;&emsp;简单的来说，我就是个新手</p>
+                <p class="intro-box-hide">&emsp;&emsp;在传智播客的黑马程序员里做了短期的培训</p>
+                <p class="intro-box-hide">&emsp;&emsp;html5，css3，javascript，php，mysql，呃，都，都，都看得懂……，咳咳，</p>
+                <p class="intro-box-hide">&emsp;&emsp;jquery.js，Bootstrap，Angular.js，Aue.js，Node.js，webApp开发，我，我，我都学过，跟他们勉强混个脸熟吧</p>
+
+                <h3 class="intro-box-hide">&emsp;&emsp;擅长： ———— //（真的有吗？）</h3>
+                <ul class="intro-list-task">
+                    <li class="intro-box-hide">
+                        <p class="c-fff">Git我用的熟！！！</p>
+                        <p class="intro-text-desc">
+                            API少，容易记，而且多少与github有点关系，嘿嘿嘿，<br> 不过，的确好像没什么用哈····//尴尬
+                        </p>
+                    </li>
+                    <li class="intro-box-hide">
+                        <p class="c-fff">Node.js下面的gulp我用的也熟！！！</p>
+                        <p class="intro-text-desc">
+                            用来压缩代码和图片，非常实用，我github上面的代码都经过压缩的！<br> 这个真的有用，只是一般人半天就掌握了哈，，，咳咳咳
+                        </p>
+                    </li>
+                    <li class="intro-box-hide">
+                        <p class="c-fff">比较喜欢原生的代码</p>
+                        <p class="intro-text-desc">
+                            不喜欢用框架和库，我不排除不思进取的堕落想法，毕竟是先学的原生的代码，<br> 但是我一直觉得，如果是我的网站，每个用户打开网站都需要先下载一堆与内容无关的包，我会很不爽，这可能就是强迫症吧。
+                        </p>
+                    </li>
+                    <li class="intro-box-hide">
+                        <p class="c-fff">面向360搜索编程&emsp;//<i>baidu</i></p>
+                        <p class="intro-text-desc">
+                            编程过程中遇到问题先在网上搜索一下，一般来说小问题就搞定了，毕竟网上有好多大神为了一个问题写了好多博客的<br> 比如我写的canvas时遇到的锯齿问题，在网上搜索，用了好多方法，最后还是用了压缩大小的笨方法，其他的都不好使~~~
+                            <br> 对了，canvas我用的，也不熟，咳咳，咳咳，但是最近一直在摸索这个东西，因为用它生成图片比下载图片快，用户费的流量也少
+                        </p>
+                    </li>
+                </ul>
+                <h4 class="intro-box-hide">&emsp;&emsp;履历，本来不想写这个的，但是想想还是标注出来比较好，免得说我欺骗面试官</h4>
+                <p class="intro-box-hide">&emsp;&emsp;2014.6月高考之后结束了学业生涯，原因说的高档一点就是，听信学历无用，低估了知识的力量</p>
+                <p class="intro-box-hide">&emsp;&emsp;中间三年卖过医疗器械，卖过保险，卖过房子，做过普工，去过工地，唯独没有编程</p>
+                <p class="intro-box-hide">&emsp;&emsp;今年老姐突然告诉我，我不应该活的那么老，94年的应该还是年轻人，我想想也是，所以我就这么入行了</p>
+                <p class="intro-box-hide">&emsp;&emsp;至今天，对于编程，前端，真的没有履历可言，最多就是github上面的那些小东西了</p>
+                <br><br><br><br>
+                <p class="intro-box-hide">&emsp;&emsp; 这个网页是为了应聘360前端实习生而写的，<b>原作者为知乎：
+                    <a href="https://www.zhihu.com/people/sens1992/answers" style="color:'red'">陈二狗不理包子脸</a></b>，已获得授权</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="static/js/MusicVisualizer.js"></script>
+    <script src="static/js/makeSky.js"></script>
+    <script src="static/js/breakImg.js"></script>
+    <script>
+        var Cookie = (function() {
+            function setCookie(name, value, day) {
+                var oDate = new Date();
+                oDate.setDate(oDate.getDate() + day);
+                document.cookie = name + '=' + value + ';expires=' + oDate;
+            }
+
+            function delCookie(name) {
+                setCookie(name, 1, -1);
+            }
+
+            function getCookie(name) {
+                var arr = document.cookie.split('; ');
+                for (var i = 0; i < arr.length; i++) {
+                    var arrName = arr[i].split('=');
+                    if (arrName[0] == name) {
+                        return arrName[1];
+                    }
+                }
+                return '';
+            }
+            return {
+                set: setCookie,
+                del: delCookie,
+                get: getCookie
+            }
+        })();
+
+        var runPrefixMethod = function(element, method) {
+            var usablePrefixMethod;
+            ["webkit", "moz", "ms", "o", ""].forEach(function(prefix) {
+                if (usablePrefixMethod) return;
+                if (prefix === "") {
+                    method = method.slice(0, 1).toLowerCase() + method.slice(1);
+                }
+
+                var typePrefixMethod = typeof element[prefix + method];
+
+                if (typePrefixMethod + "" !== "undefined") {
+                    if (typePrefixMethod === "function") {
+                        usablePrefixMethod = element[prefix + method]();
+                    } else {
+                        usablePrefixMethod = element[prefix + method];
+                    }
+                }
+            });
+
+            return usablePrefixMethod;
+        };
+
+        var prmFirst = new Promise(function(resolve) { 
+        //其实这点不是太明白，为什么不用html5的audio标签
+        //用audio标签设置样式透明，定位自然把它掩盖就消失了
+        //js设置mp3.onload事件，也能判断加载是否完毕
+            var step = 0;
+            var isLoaded = false;
+            var lastSum = 0;
+
+            var mv = new MusicVisualizer({
+                size: 128,
+                visualizer: function(arr) {
+                    if (step === 3) return;
+                    var sum = arr.reduce(function(prevResult, item) {
+                        return prevResult + item;
+                    });
+                    if (sum > 5000) {
+                        if (lastSum - sum > 500) {
+                            $('.j-wrapper-block-main').css({
+                                'transform': 'scale(0.5)'
+                            });
+
+                            lastSum = sum;
+                        } else if (sum - lastSum > 200) {
+                            $('.j-wrapper-block-main').css({
+                                'transform': 'scale(' + (0.5 + 2 * (sum - lastSum) / 10000) + ')'
+                            });
+                            lastSum = sum;
+                        }
+                    } else {
+                        $('.j-wrapper-block-main').css({
+                            'transform': 'scale(0.5)'
+                        });
+                        lastSum = sum;
+                    }
+                }
+            });
+            mv.play('static/res/Routine.mp3', function() {
+                isLoaded = true;
+                if (step > 0) {
+                    mv.start();
+                }
+            });
+
+            if (!Cookie.get('finished')) {
+                var welComeText = document.getElementsByClassName('j-welcome-text');
+                [].forEach.call(welComeText, function(item) {
+                    item.classList.add('play');
+                });
+
+                setTimeout(function() {
+                    var _removeFlagStr = isLoaded ? 'fail' : 'success';
+                    [].forEach.call(welComeText, function(item) {
+                        if (item.classList.contains(_removeFlagStr)) {
+                            item.remove();
+                        }
+                    });
+                }, 8000);
+                //welcome-box-center
+                setTimeout(function() {
+                    document.getElementsByClassName('j-welcome-box-center')[0].classList.add('die');
+                    setTimeout(function() {
+                        document.getElementsByClassName('j-welcome-box-center')[0].remove();
+                        document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
+                        document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
+                    }, 1800);
+                }, 11000);
+            } else {
+                document.getElementsByClassName('j-welcome-box-center')[0].remove();
+                document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
+                document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
+            }
+
+            function step2() {
+                step = 1;
+
+                if (isLoaded) {
+                    mv.start();
+                }
+                setTimeout(function() {
+                    runPrefixMethod(document.documentElement, "RequestFullScreen");
+                    document.getElementsByClassName('j-welcome-block')[0].classList.add('hide');
+                }, 1000);
+
+                makeSky.init(function(far) {
+                    if (step === 1 && far > 200) {
+                        step = 2;
+                        $('.j-wrapper-block-main').css({
+                            'z-index': '20'
+                        });
+                        $('.j-stage-block-main').css({
+                            'transform': 'translate3d(0,0,0)'
+                        });
+                        $('.j-stage-box-earth').click(function() {
+                            step = 3;
+                            var $this = $(this);
+                            if ($this.hasClass('no')) return;
+                            $this.addClass('shake no');
+                            var bi1 = new MakeBreakImg({
+                                el: $('.j-stage-img-earth')
+                            });
+                            var bi2 = new MakeBreakImg({
+                                el: $('.j-wrapper-img-back'),
+                                strStyle: 'position: relative;z-index: 10;opacity: 0.5',
+                                itemSpl: 10
+                            });
+
+                            makeSky.backToStart(function() {
+                                $('body').addClass('nocursor');
+                                $('.j-wrapper-cvs').fadeOut(1000);
+                                $('#j-wrapper-block-back').css('perspective', 'none');
+
+                                bi1.makeBreak();
+                                bi2.makeBreak();
+
+                                try {
+                                    mv.slow(); //有时候直到现在 音乐都没有加载完
+                                } catch (e) {}
+
+                                setTimeout(function() {
+                                    $('.j-sky-block').remove();
+                                    $('.j-intro-block').removeClass('hide');
+                                    setTimeout(resolve, 3000);
+                                }, 1000);
+                            });
+                        });
+
+                    }
+                });
+
+                var timeSeed = 0;
+                window.onresize = function() {
+                    timeSeed && clearTimeout(timeSeed);
+                    timeSeed = setTimeout(function() {
+                        makeSky.restart();
+                    }, 200);
+                };
+
+                setTimeout(function() {
+                    document.getElementsByClassName('j-welcome-block')[0].remove();
+                }, 2000);
+            }
+
+            document.getElementsByClassName('j-welcome-btn')[0].addEventListener('click', function() {
+                if (!Cookie.get('finished')) {
+                    Cookie.set('finished', '1', 1);
+                }
+
+                step2();
+                step2 = function() {};
+            });
+
+            document.body.addEventListener("dblclick", function() {
+                if (runPrefixMethod(document, "FullScreen") || runPrefixMethod(document, "IsFullScreen")) {
+                    runPrefixMethod(document, "CancelFullScreen");
+                } else {
+                    runPrefixMethod(document.documentElement, "RequestFullScreen");
+                }
+            });
+
+        });
+
+//8.23 by calldream  ↓
+if (window.innerWidth<window.innerHeight) {
+	document.body.style.transform = "rotate(90deg)";
+}
+
+
+
+
+        prmFirst.then(function() {
+            return new Promise(function(resolve) {
+                var code =
+                    `
+/* ......
+* 厉害了我的哥，这下玩坏了吧！
+* 没办法，那只能重新造一个网页了╮(╯_╰)╭
+*/
+
+/* 首先给所有元素加上过渡效果 */
+* {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+/* 还是用绚烂的星空背景才有逼格 */
+html,body {
+    background-image: url("https://t.cn/RotuF4m");
+    color: #333;
+}
+/* 好歹还是加个边框吧 */
+.display-block {
+    padding: 10px;
+    border: 2px solid rgb(0,155,255);
+    margin: 10px;
+    overflow: auto;
+    width: 400px; height: 90vh;
+    float: left;
+    background: rgba(0,155,255,0.5);
+}
+/* 还差一个版块来介绍自己 */
+.intro-box{
+    padding: 12px;
+    background: rgba(0,55,205,0.3);
+    margin: 10px;
+    min-height: 110vh;
+    overflow: hidden;
+}
+/* 使命完成了，给主要的版块让让位置吧 */
+.display-block {
+    transform-origin: 0 50%;
+    -webkit-transform: rotateY(30deg);
+    transform: rotateY(30deg);
+    margin-right: -100px;
+}
+`;
+                var idx = 0;
+                var len = code.length;
+
+                function appendStyle() {
+                    $('.style-block').html('<style>' + code.slice(0, idx++) + '</style>');
+                    $('.display-block').text(code.slice(0, idx)).scrollTop(9999);
+                    if (idx === len) {
+                        resolve();
+                        return;
+                    }
+                    setTimeout(appendStyle, 30);
+                }
+                appendStyle();
+            });
+        }).then(function() {
+            $('body').removeClass('nocursor');
+            $('.j-intro-box-main').removeClass('hide');
+            var $introBoxHide = $('.intro-box-hide');
+            var len = $introBoxHide.length;
+            for (var i = 0; i < len; i++) {
+                (function(i) {
+                    setTimeout(function() {
+                        $introBoxHide.eq(i).addClass('show');
+                    }, i * 500);
+                })(i)
+            }
+        });
+    </script>
+
+</body>
+
+</html>
